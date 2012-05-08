@@ -1,5 +1,7 @@
 require "rsvg/version"
 
-module Rsvg
-  # Your code goes here...
+module RSVG
+  autoload :Node, 'rsvg/node'
+  autoload :Document, 'rsvg/document'
+  autoload :Rect, 'rsvg/rect'
 end
