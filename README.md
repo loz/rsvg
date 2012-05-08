@@ -1,6 +1,6 @@
 # Rsvg
 
-TODO: Write a gem description
+A simple Ruby SVG builder
 
 ## Installation
 
@@ -18,7 +18,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+This gem is currently under very initial development.  Look at the specs for usage until more official documentation comes.
 
 ## Contributing
 
