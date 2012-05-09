@@ -3,13 +3,19 @@ module RSVG
     attr_reader :attributes
 
     def initialize(options = {})
-      @attributes = options
+      @attributes = self.class.default_attributes || {}
+      @attributes.merge! options
     end
 
     class << self
       def node_type(t=nil)
         @node_type = t if t
         @node_type
+      end
+
+      def default_attributes(attrs=nil)
+        @default_attributes = attrs if attrs
+        @default_attributes
       end
     end
 

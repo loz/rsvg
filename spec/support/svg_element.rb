@@ -25,6 +25,24 @@ shared_examples_for 'svg element' do |type|
       element.attributes[:one].should == :a
       element.attributes[:two].should == :b
     end
+
+    it "assigns default attributes" do
+      dup = described_class.dup
+      dup.default_attributes :foo => :bar, :baz => :buz
+      element = dup.new
+
+      element.attributes[:foo].should == :bar
+      element.attributes[:baz].should == :buz
+    end
+
+    it "allows overiding of default attribtues" do
+      dup = described_class.dup
+      dup.default_attributes :foo => :bar, :baz => :buz
+      element = dup.new :foo => :notbar
+
+      element.attributes[:foo].should == :notbar
+      element.attributes[:baz].should == :buz
+    end
   end
 end
 
