@@ -17,6 +17,20 @@ shared_examples_for 'svg element' do |type|
       xml = subject.to_xml
       xml.attributes['foo'].should == 'bar'
     end
+
+    describe "style attributes" do
+      before :each do
+        subject.attributes[:style] = {
+          :one => :two,
+          :three => :four
+        }
+      end
+
+      it "joins them together into ; separated list" do
+        xml = subject.to_xml
+        xml.attributes['style'].should == 'one=two; three=four'
+      end
+    end
   end
 
   describe 'attributes' do

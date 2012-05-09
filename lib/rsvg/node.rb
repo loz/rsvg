@@ -21,6 +21,10 @@ module RSVG
 
     def to_xml
       xml = REXML::Element.new self.class.node_type.to_s
+      style = @attributes.delete :style
+      if style
+        xml.attributes['style'] = style.map {|k,v| "#{k}=#{v}"}.join("; ")
+      end
       @attributes.each do |attr, value|
         xml.attributes[attr.to_s] = value
       end
