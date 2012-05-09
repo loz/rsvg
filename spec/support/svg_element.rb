@@ -28,7 +28,7 @@ shared_examples_for 'svg element' do |type|
 
       it "joins them together into ; separated list" do
         xml = subject.to_xml
-        xml.attributes['style'].should == 'one=two; three=four'
+        xml.attributes['style'].should == 'one: two; three: four'
       end
     end
   end

@@ -3,7 +3,8 @@ module RSVG
     attr_reader :attributes
 
     def initialize(options = {})
-      @attributes = self.class.default_attributes || {}
+      @attributes = {}
+      @attributes.merge! self.class.default_attributes if self.class.default_attributes
       @attributes.merge! options
     end
 
@@ -23,7 +24,7 @@ module RSVG
       xml = REXML::Element.new self.class.node_type.to_s
       style = @attributes.delete :style
       if style
-        xml.attributes['style'] = style.map {|k,v| "#{k}=#{v}"}.join("; ")
+        xml.attributes['style'] = style.map {|k,v| "#{k}: #{v}"}.join("; ")
       end
       @attributes.each do |attr, value|
         xml.attributes[attr.to_s] = value
