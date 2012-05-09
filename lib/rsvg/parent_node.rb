@@ -2,9 +2,9 @@ module RSVG
   class ParentNode < Node
     attr_reader :children
 
-    def initialize
+    def initialize(*args)
       @children = []
-      super
+      super(*args)
     end
 
     def <<(child)

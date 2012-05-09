@@ -11,6 +11,20 @@ shared_examples_for 'svg element' do |type|
       xml.node_type.should == :element
       xml.name.should == type.to_s
     end
+
+    it "adds attributes to it's node" do
+      subject.attributes[:foo] = :bar
+      xml = subject.to_xml
+      xml.attributes['foo'].should == 'bar'
+    end
+  end
+
+  describe 'attributes' do
+    it "assigns attributes given on initialize" do
+      element = described_class.new :one => :a, :two => :b
+      element.attributes[:one].should == :a
+      element.attributes[:two].should == :b
+    end
   end
 end
 
