@@ -1,7 +1,7 @@
 require 'rexml/document'
 
 module RSVG
-  class Document < Node
+  class Document < ParentNode
     node_type :svg
 
     def to_xml
