@@ -9,4 +9,5 @@ module RSVG
   autoload :Ellipse, 'rsvg/ellipse'
   autoload :Line, 'rsvg/line'
   autoload :Group, 'rsvg/group'
+  autoload :Link, 'rsvg/link'
 end
