@@ -6,4 +6,5 @@ module RSVG
   autoload :Document, 'rsvg/document'
   autoload :Rect, 'rsvg/rect'
   autoload :Circle, 'rsvg/circle'
+  autoload :Ellipse, 'rsvg/ellipse'
 end

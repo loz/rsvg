@@ -8,9 +8,11 @@ rect = RSVG::Rect.new :width => 100, :height => 50,
       :fill => :green}
 
 circ = RSVG::Circle.new :cx => 300, :cy => 300
+ellipse = RSVG::Ellipse.new :cx => 300, :cy => 100
 
 defrect = RSVG::Rect.new
 doc << rect
 doc << defrect
 doc << circ
+doc << ellipse
 puts doc.to_xml
