@@ -1,0 +1,11 @@
+Things I want to do
+
+Circle
+- have :x, :y  as position work into :cx, :cy
+- have :radius work for r
+
+Ellipse
+- have :x, :y as circle
+- :xradius, :yradius => rx, ry
+
+

@@ -7,7 +7,10 @@ rect = RSVG::Rect.new :width => 100, :height => 50,
       :stroke => :black, 'stroke-width:' => '2pt',
       :fill => :green}
 
+circ = RSVG::Circle.new :cx => 300, :cy => 300
+
 defrect = RSVG::Rect.new
 doc << rect
 doc << defrect
+doc << circ
 puts doc.to_xml

@@ -1,4 +1,3 @@
-require 'rexml/document'
 
 module RSVG
   class Document < ParentNode

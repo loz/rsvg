@@ -1,3 +1,5 @@
+require 'rexml/document'
+
 module RSVG
   class Node
     attr_reader :attributes
