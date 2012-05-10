@@ -6,13 +6,14 @@ rect = RSVG::Rect.new :width => 100, :height => 50,
     :rx => 10, :ry => 10, :style => {
       :stroke => :black, 'stroke-width:' => '2pt',
       :fill => :green}
-
+defrect = RSVG::Rect.new
 circ = RSVG::Circle.new :cx => 300, :cy => 300
 ellipse = RSVG::Ellipse.new :cx => 300, :cy => 100
+line = RSVG::Line.new :x1 => 50, :x2 => 250, :y1 => 20, :y2 => 100
 
-defrect = RSVG::Rect.new
 doc << rect
 doc << defrect
 doc << circ
 doc << ellipse
+doc << line
 puts doc.to_xml
