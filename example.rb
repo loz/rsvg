@@ -10,10 +10,15 @@ defrect = RSVG::Rect.new
 circ = RSVG::Circle.new :cx => 300, :cy => 300
 ellipse = RSVG::Ellipse.new :cx => 300, :cy => 100
 line = RSVG::Line.new :x1 => 50, :x2 => 250, :y1 => 20, :y2 => 100
+group = RSVG::Group.new :transform => "translate(200,150), rotate(45)"
+group << RSVG::Rect.new
+group << RSVG::Line.new(:x1 => 0, :y1 => 110, :x2 => 100, :y2 => 110)
+
 
 doc << rect
 doc << defrect
 doc << circ
 doc << ellipse
 doc << line
+doc << group
 puts doc.to_xml

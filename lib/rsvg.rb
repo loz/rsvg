@@ -8,4 +8,5 @@ module RSVG
   autoload :Circle, 'rsvg/circle'
   autoload :Ellipse, 'rsvg/ellipse'
   autoload :Line, 'rsvg/line'
+  autoload :Group, 'rsvg/group'
 end
