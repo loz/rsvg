@@ -9,7 +9,7 @@ module RSVG
 
     def to_xml
       xml = super
-      xml.attributes['xlink:href'] = @targetid
+      xml.attributes['xlink:href'] = '#' + @targetid.to_s
       xml
     end
   end

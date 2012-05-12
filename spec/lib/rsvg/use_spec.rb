@@ -6,7 +6,7 @@ describe RSVG::Use do
 
   describe :to_xml do
     it "adds given target id as xlink:href" do
-      subject.to_xml.attributes['xlink:href'].should == 'target_id'
+      subject.to_xml.attributes['xlink:href'].should == '#target_id'
     end
   end
 end

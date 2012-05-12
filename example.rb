@@ -18,14 +18,19 @@ group << RSVG::Line.new(:x1 => 0, :y1 => 110, :x2 => 100, :y2 => 110)
 link = RSVG::Link.new :href => 'https://github.com/loz/rsvg'
 link << RSVG::Rect.new(:x => 60, :y => 60)
 
-#Reuse
+#Reuse1
 grp = RSVG::Group.new :style => {:stroke => :blue, :fill => :none},
-  :transform => "translate(400, 400)"
-boval = RSVG::Ellipse.new  :id => :boval
-grp << boval
-35.times do |d|
-  grp << RSVG::Use.new(:boval, :transform => "rotate(#{d*10}, 100, 100)")
+  :transform => "translate(400, 300)"
+boval = RSVG::Ellipse.new  :id => :boval, :style => {}, :cx => 100, :cy => 100
+grp1 = RSVG::Group.new :id => :grp1
+grp1 << boval
+3.times do |d|
+  grp1 << RSVG::Use.new(:boval, :transform => "rotate(#{(d+1)*15}, 100, 100)")
 end
+grp << grp1
+grp << RSVG::Use.new(:grp1, :transform => "rotate(45, 100, 100)")
+grp << RSVG::Use.new(:grp1, :transform => "rotate(90, 100, 100)")
+grp << RSVG::Use.new(:grp1, :transform => "rotate(135, 100, 100)")
 doc << grp
 
 doc << rect
