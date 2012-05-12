@@ -18,6 +18,16 @@ group << RSVG::Line.new(:x1 => 0, :y1 => 110, :x2 => 100, :y2 => 110)
 link = RSVG::Link.new :href => 'https://github.com/loz/rsvg'
 link << RSVG::Rect.new(:x => 60, :y => 60)
 
+#Reuse
+grp = RSVG::Group.new :style => {:stroke => :blue, :fill => :none},
+  :transform => "translate(400, 400)"
+boval = RSVG::Ellipse.new  :id => :boval
+grp << boval
+35.times do |d|
+  grp << RSVG::Use.new(:boval, :transform => "rotate(#{d*10}, 100, 100)")
+end
+doc << grp
+
 doc << rect
 doc << defrect
 doc << circ

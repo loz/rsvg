@@ -10,4 +10,5 @@ module RSVG
   autoload :Line, 'rsvg/line'
   autoload :Group, 'rsvg/group'
   autoload :Link, 'rsvg/link'
+  autoload :Use, 'rsvg/use'
 end

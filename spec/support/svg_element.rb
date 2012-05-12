@@ -4,7 +4,7 @@ class ExampleElement
   end
 end
 
-shared_examples_for 'svg element' do |type|
+shared_examples_for 'svg element' do |type, *args|
   describe :to_xml do
     it "is a #{type} element" do
       xml = subject.to_xml
@@ -35,7 +35,7 @@ shared_examples_for 'svg element' do |type|
 
   describe 'attributes' do
     it "assigns attributes given on initialize" do
-      element = described_class.new :one => :a, :two => :b
+    element = described_class.new *args, :one => :a, :two => :b
       element.attributes[:one].should == :a
       element.attributes[:two].should == :b
     end
@@ -43,7 +43,7 @@ shared_examples_for 'svg element' do |type|
     it "assigns default attributes" do
       dup = described_class.dup
       dup.default_attributes :foo => :bar, :baz => :buz
-      element = dup.new
+      element = dup.new *args
 
       element.attributes[:foo].should == :bar
       element.attributes[:baz].should == :buz
@@ -52,7 +52,7 @@ shared_examples_for 'svg element' do |type|
     it "allows overiding of default attribtues" do
       dup = described_class.dup
       dup.default_attributes :foo => :bar, :baz => :buz
-      element = dup.new :foo => :notbar
+      element = dup.new *args, :foo => :notbar
 
       element.attributes[:foo].should == :notbar
       element.attributes[:baz].should == :buz
