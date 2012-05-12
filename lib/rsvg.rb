@@ -11,4 +11,5 @@ module RSVG
   autoload :Group, 'rsvg/group'
   autoload :Link, 'rsvg/link'
   autoload :Use, 'rsvg/use'
+  autoload :Path, 'rsvg/path'
 end
