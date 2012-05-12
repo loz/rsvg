@@ -16,9 +16,8 @@ describe RSVG::Path do
   shared_examples_for 'path action' do |command, char|
     it "adds #{command} commands to path data" do
       subject.public_send(command, 100, 100)
-      subject.public_send(command, 150, 150)
       xml = subject.to_xml
-      xml.attributes['d'].should == "#{char}100 100 #{char}150 150"
+      xml.attributes['d'].should == "#{char}100 100"
     end
 
     it "adds #{command} relatively with :relative => true" do
@@ -26,6 +25,15 @@ describe RSVG::Path do
       xml = subject.to_xml
       lchar = char.downcase
       xml.attributes['d'].should == "#{lchar}100 100"
+    end
+
+    context "when previous command was same" do
+      it "just adds co-ordinates" do
+        subject.public_send(command, 100, 100)
+        subject.public_send(command, 150, 150)
+        xml = subject.to_xml
+        xml.attributes['d'].should == "#{char}100 100 150 150"
+      end
     end
   end
 
@@ -35,5 +43,13 @@ describe RSVG::Path do
 
   describe :line do
     it_behaves_like 'path action', :line, 'L'
+  end
+
+  describe :cubic do
+    it_behaves_like 'path action', :cubic, 'C'
+  end
+
+  describe :quadratic do
+    it_behaves_like 'path action', :quadratic, 'Q'
   end
 end

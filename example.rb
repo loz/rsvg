@@ -56,4 +56,24 @@ path.line 200, 120
 grp << path
 doc << grp
 
+grp = RSVG::Group.new :transform => "translate(100, 350)"
+y = [0, 100]
+cubic = RSVG::Path.new :id => :cubic
+quadratic = RSVG::Path.new :id => :quadratic
+points = RSVG::Path.new :style => {:stroke => :red, 'stroke-width' => '1pt', :fill => :none}
+points.move 0, 0
+cubic.move 0, 0
+quadratic.move 0, 0
+20.times do |x|
+  cx, cy = x*10, y.first
+  points.line cx, cy
+  cubic.cubic cx, cy
+  quadratic.quadratic cx, cy
+  y.rotate!
+end
+grp << points
+grp << cubic
+grp << quadratic
+doc << grp
+
 puts doc.to_xml

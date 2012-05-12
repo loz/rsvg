@@ -21,6 +21,14 @@ module RSVG
       @actions << {:instruction => :L, :points => [x,y], :options => options}
     end
 
+    def cubic(x,y, options = {})
+      @actions << {:instruction => :C, :points => [x,y], :options => options}
+    end
+
+    def quadratic(x,y, options = {})
+      @actions << {:instruction => :Q, :points => [x,y], :options => options}
+    end
+
     def to_xml
       xml = super
       xml.add_attribute 'd', build_actions
@@ -30,11 +38,17 @@ module RSVG
     private
 
     def build_actions
+      last = nil
       @actions.map do |a|
         instruction = a[:instruction].to_s
         instruction.downcase! if a[:options][:relative]
         points = a[:points].join ' '
-        "%s%s" % [instruction, points]
+        if last == instruction
+          points
+        else
+          last = instruction
+          "%s%s" % [instruction, points]
+        end
       end.join ' '
     end
   end
