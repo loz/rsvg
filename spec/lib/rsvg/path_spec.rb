@@ -74,6 +74,10 @@ describe RSVG::Path do
     it_behaves_like 'path action', :curve, 'S', true
   end
 
+  describe :bezier do
+    it_behaves_like 'path action', :bezier, 'T', true
+  end
+
   describe :arc do
     it "has xy radius and end points, with 0 defaults for other flags" do
       subject.arc 20, 10, 50, 75

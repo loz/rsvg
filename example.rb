@@ -57,32 +57,34 @@ doc << grp
 
 cgrp = RSVG::Group.new :transform => "translate(100, 350)"
 qgrp = RSVG::Group.new :transform => "translate(100, 460)"
-sgrp = RSVG::Group.new :transform => "translate(100, 570)"
+sgrp = RSVG::Group.new :transform => "translate(300, 350)"
+bgrp = RSVG::Group.new :transform => "translate(300, 460)"
 y = [0, 100]
 cubic = RSVG::Path.new :id => :cubic
 quadratic = RSVG::Path.new :id => :quadratic
 curve = RSVG::Path.new :id => :smoothcurve
+bezier = RSVG::Path.new :id => :bezier
 points1 = RSVG::Path.new :style => {:stroke => :red, 'stroke-width' => '1pt', :fill => :none}
 points2 = RSVG::Path.new :style => {:stroke => :red, 'stroke-width' => '1pt', :fill => :none}
 points3 = RSVG::Path.new :style => {:stroke => :red, 'stroke-width' => '1pt', :fill => :none}
+points4 = RSVG::Path.new :style => {:stroke => :red, 'stroke-width' => '1pt', :fill => :none}
 20.times do |x|
   cx, cy = x*10, y.first
   points1.line cx, cy
   points2.line cx, cy
   points3.line cx, cy
+  points4.line cx, cy
   cubic.cubic cx, cy
   quadratic.quadratic cx, cy
   curve.curve cx, cy
+  bezier.bezier cx, cy
   y.rotate!
 end
-cgrp << points1
-cgrp << cubic
-qgrp << points2
-qgrp << quadratic
+cgrp << points1 << cubic
+qgrp << points2 << quadratic
 sgrp << points3 << curve
-doc << cgrp
-doc << qgrp
-doc << sgrp
+bgrp << points4 << bezier
+doc << cgrp << qgrp << sgrp << bgrp
 
 grp = RSVG::Group.new :transform => 'translate(400, 150)'
 path = RSVG::Path.new

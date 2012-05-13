@@ -37,6 +37,10 @@ module RSVG
       @actions << {:instruction => :S, :points => [x,y], :options => options}
     end
 
+    def bezier(x,y, options = {})
+      @actions << {:instruction => :T, :points => [x,y], :options => options}
+    end
+
     def arc(rx, ry, tox, toy, options = {})
       large = options.delete(:large) ? 1 : 0
       invert = options.delete(:invert) ? 1 : 0
@@ -59,7 +63,7 @@ module RSVG
 
     def build_actions
       last = nil
-      condensed = [?Q, ?C, ?S]
+      condensed = [?Q, ?C, ?S, ?T]
       @actions.map do |a|
         instruction = a[:instruction].to_s
         instruction.downcase! if a[:options][:relative]
