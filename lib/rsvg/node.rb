@@ -4,7 +4,8 @@ module RSVG
   class Node
     attr_reader :attributes
 
-    def initialize(options = {})
+    def initialize(*args)
+      options = args.extract_options!
       @attributes = {}
       @attributes.merge! self.class.default_attributes if self.class.default_attributes
       @attributes.merge! options

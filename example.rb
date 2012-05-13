@@ -46,8 +46,7 @@ doc << grp
 
 
 grp = RSVG::Group.new :transform => "translate(350, 0)"
-path = RSVG::Path.new
-path.move 100, 100
+path = RSVG::Path.new 100, 100
 path.line 200, 100
 path.line 100, 110
 path.move 200, 110
@@ -61,9 +60,6 @@ y = [0, 100]
 cubic = RSVG::Path.new :id => :cubic
 quadratic = RSVG::Path.new :id => :quadratic
 points = RSVG::Path.new :style => {:stroke => :red, 'stroke-width' => '1pt', :fill => :none}
-points.move 0, 0
-cubic.move 0, 0
-quadratic.move 0, 0
 20.times do |x|
   cx, cy = x*10, y.first
   points.line cx, cy

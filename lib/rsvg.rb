@@ -1,4 +1,5 @@
 require "rsvg/version"
+require "rsvg/array_options"
 
 module RSVG
   autoload :Node, 'rsvg/node'

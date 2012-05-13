@@ -11,20 +11,24 @@ describe RSVG::Path do
         :fill => :none
       }
     end
+
+    it "starts with move to 0 0" do
+      subject.to_xml.attributes['d'].should == 'M0 0'
+    end
   end
 
   shared_examples_for 'path action' do |command, char|
     it "adds #{command} commands to path data" do
       subject.public_send(command, 100, 100)
       xml = subject.to_xml
-      xml.attributes['d'].should == "#{char}100 100"
+      xml.attributes['d'].should end_with "#{char}100 100"
     end
 
     it "adds #{command} relatively with :relative => true" do
       subject.public_send(command, 100, 100, :relative => true)
       xml = subject.to_xml
       lchar = char.downcase
-      xml.attributes['d'].should == "#{lchar}100 100"
+      xml.attributes['d'].should end_with "#{lchar}100 100"
     end
 
     context "when previous command was same" do
@@ -32,12 +36,23 @@ describe RSVG::Path do
         subject.public_send(command, 100, 100)
         subject.public_send(command, 150, 150)
         xml = subject.to_xml
-        xml.attributes['d'].should == "#{char}100 100 150 150"
+        xml.attributes['d'].should end_with "#{char}100 100 150 150"
       end
     end
   end
 
+  context "when initialized with co-ordinates" do
+    subject { described_class.new 10, 10 }
+
+    it "moves to given co-ordinates" do
+      subject.to_xml.attributes['d'].should == 'M10 10'
+    end
+  end
+
   describe :move do
+    before :each do
+      subject.line 0, 0 #To ensure isn't preceded by a move command
+    end
     it_behaves_like 'path action', :move, 'M'
   end
 

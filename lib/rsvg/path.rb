@@ -11,6 +11,10 @@ module RSVG
     def initialize(*args)
       super(*args)
       @actions = []
+      options = args.extract_options!
+      x = args[0] || 0
+      y = args[1] || 0
+      move x, y
     end
 
     def move(x,y, options = {})
