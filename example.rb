@@ -61,6 +61,7 @@ sgrp = RSVG::Group.new :transform => "translate(100, 570)"
 y = [0, 100]
 cubic = RSVG::Path.new :id => :cubic
 quadratic = RSVG::Path.new :id => :quadratic
+curve = RSVG::Path.new :id => :smoothcurve
 points1 = RSVG::Path.new :style => {:stroke => :red, 'stroke-width' => '1pt', :fill => :none}
 points2 = RSVG::Path.new :style => {:stroke => :red, 'stroke-width' => '1pt', :fill => :none}
 points3 = RSVG::Path.new :style => {:stroke => :red, 'stroke-width' => '1pt', :fill => :none}
@@ -71,13 +72,14 @@ points3 = RSVG::Path.new :style => {:stroke => :red, 'stroke-width' => '1pt', :f
   points3.line cx, cy
   cubic.cubic cx, cy
   quadratic.quadratic cx, cy
+  curve.curve cx, cy
   y.rotate!
 end
 cgrp << points1
 cgrp << cubic
 qgrp << points2
 qgrp << quadratic
-sgrp << points3 #<< quadratic
+sgrp << points3 << curve
 doc << cgrp
 doc << qgrp
 doc << sgrp
