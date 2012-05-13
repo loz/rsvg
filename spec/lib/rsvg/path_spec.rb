@@ -17,7 +17,7 @@ describe RSVG::Path do
     end
   end
 
-  shared_examples_for 'path action' do |command, char|
+  shared_examples_for 'path action' do |command, char, condenses = false|
     it "adds #{command} commands to path data" do
       subject.public_send(command, 100, 100)
       xml = subject.to_xml
@@ -35,7 +35,11 @@ describe RSVG::Path do
       subject.public_send(command, 100, 100)
       subject.public_send(command, 150, 150)
       xml = subject.to_xml
-      xml.attributes['d'].should end_with "#{char}100 100 #{char}150 150"
+      if condenses
+        xml.attributes['d'].should end_with "#{char}100 100 150 150"
+      else
+        xml.attributes['d'].should end_with "#{char}100 100 #{char}150 150"
+      end
     end
   end
 
@@ -59,11 +63,11 @@ describe RSVG::Path do
   end
 
   describe :cubic do
-    it_behaves_like 'path action', :cubic, 'C'
+    it_behaves_like 'path action', :cubic, 'C', true
   end
 
   describe :quadratic do
-    it_behaves_like 'path action', :quadratic, 'Q'
+    it_behaves_like 'path action', :quadratic, 'Q', true
   end
 
   describe :arc do

@@ -55,11 +55,17 @@ module RSVG
 
     def build_actions
       last = nil
+      condensed = [?Q, ?C]
       @actions.map do |a|
         instruction = a[:instruction].to_s
         instruction.downcase! if a[:options][:relative]
         points = a[:points].join ' '
-        "%s%s" % [instruction, points]
+        if instruction == last && condensed.include?(instruction)
+          points
+        else
+          last = instruction
+          "%s%s" % [instruction, points]
+        end
       end.join ' '
     end
   end
