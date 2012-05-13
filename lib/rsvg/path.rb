@@ -33,6 +33,18 @@ module RSVG
       @actions << {:instruction => :Q, :points => [x,y], :options => options}
     end
 
+    def arc(rx, ry, tox, toy, options = {})
+      large = options.delete(:large) ? 1 : 0
+      invert = options.delete(:invert) ? 1 : 0
+      rotation = options.delete(:rotation) || 0
+      command = {
+        :instruction => :A,
+        :points =>[rx, ry, rotation, large, invert, tox, toy],
+        :options => options
+      }
+      @actions << command
+    end
+
     def to_xml
       xml = super
       xml.add_attribute 'd', build_actions
@@ -47,12 +59,7 @@ module RSVG
         instruction = a[:instruction].to_s
         instruction.downcase! if a[:options][:relative]
         points = a[:points].join ' '
-        if last == instruction
-          points
-        else
-          last = instruction
-          "%s%s" % [instruction, points]
-        end
+        "%s%s" % [instruction, points]
       end.join ' '
     end
   end

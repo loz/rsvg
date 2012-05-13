@@ -31,13 +31,11 @@ describe RSVG::Path do
       xml.attributes['d'].should end_with "#{lchar}100 100"
     end
 
-    context "when previous command was same" do
-      it "just adds co-ordinates" do
-        subject.public_send(command, 100, 100)
-        subject.public_send(command, 150, 150)
-        xml = subject.to_xml
-        xml.attributes['d'].should end_with "#{char}100 100 150 150"
-      end
+    it "adds each #{command} co-ordinates" do
+      subject.public_send(command, 100, 100)
+      subject.public_send(command, 150, 150)
+      xml = subject.to_xml
+      xml.attributes['d'].should end_with "#{char}100 100 #{char}150 150"
     end
   end
 
@@ -66,5 +64,27 @@ describe RSVG::Path do
 
   describe :quadratic do
     it_behaves_like 'path action', :quadratic, 'Q'
+  end
+
+  describe :arc do
+    it "has xy radius and end points, with 0 defaults for other flags" do
+      subject.arc 20, 10, 50, 75
+      subject.to_xml.attributes['d'].should end_with 'A20 10 0 0 0 50 75'
+    end
+
+    it "has flag :large" do
+      subject.arc 20, 10, 50, 75, :large => true
+      subject.to_xml.attributes['d'].should end_with 'A20 10 0 1 0 50 75'
+    end
+
+    it "has flag :invert for sweep" do
+      subject.arc 20, 10, 50, 75, :invert => true
+      subject.to_xml.attributes['d'].should end_with 'A20 10 0 0 1 50 75'
+    end
+
+    it "has :rotation option" do
+      subject.arc 20, 10, 50, 75, :rotation => 45
+      subject.to_xml.attributes['d'].should end_with 'A20 10 45 0 0 50 75'
+    end
   end
 end

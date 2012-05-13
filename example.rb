@@ -72,4 +72,13 @@ grp << cubic
 grp << quadratic
 doc << grp
 
+grp = RSVG::Group.new :transform => 'translate(400, 150)'
+path = RSVG::Path.new
+(0..45).step(10) do |angle|
+  path.move 0, 0
+  path.arc 100, 50, 100, 75, :large => true, :rotation => angle
+end
+grp << path
+doc << grp
+
 puts doc.to_xml
